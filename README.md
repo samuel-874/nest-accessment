@@ -71,3 +71,51 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Usage
+
+The Untity Module Contains some Function That Help Implement Pagianation, Sorting & Filtering Accross Multiple Modules .
+It provides support for pagination, filtering and sorting .
+
+To get Started call the`` hydate`` endpoint which is of Type ``POST`` '/api/rooms/hydrate' to add data to the db (if not any)
+The after you can go ahead to call the rooms endpoint to get all rooms ``/api/rooms/hydrate``
+
+
+The Utility module exports 2 Functions ``getOrder`` & ``getWhere``
+
+the getOrder is allows you to sort your data in desired format
+while the getWhere allows for filtering 
+
+To Use this Utility Modules You need to pass parameters annotated with the following otto you controller endpoint:
+  ``@PaginationParam``,``@SortingParams``, ``@FilteringParams``
+
+Each the SortingParams & FilteringParams requires you to pass the allowed fields.
+
+To sort you can pass an Object to the sort array i.e ``{"field":"name","order":"ASC"}``
+Also to filter you have to pass the field, value and the operators
+The following are allowed operators
+
+        * equals
+        * not
+        * gt (greater than)
+        * gte (greater than or equal)
+        * lt (less than)
+        * lte (less than or equal)
+        * like
+        * in
+        * notIn
+        * isNull
+        * isNotNull
+
+
+Where are some instances you can try out 
+ *  /api/rooms?page=0&limit=10&filters=[]&sort=[{"field":"name","order":"ASC"}]
+ * /api/rooms?page=0&limit=5&filters=[{"field":"capacity","value":10,"operator":"gte"}]&sort=[{"field":"name","order":"ASC"}]
+/api/rooms?page=1&limit=2&filters=[{"field":"userId","value":1,"operator":"equals"}]&sort=[{"field":"capacity","order":"DESC"}]
+page=0&limit=5&filters=[{"field":"name","value":"Room","operator":"like"}]&sort=[{"field":"userId","order":"ASC"}]
+
+Once more again Thanks for considering my application.
+
+
+* Please Note: The ca.pem is an ssl certificate provided my the posgress db provider which is required to connect to the db
+
