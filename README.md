@@ -72,7 +72,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 
-## Usage
+##  Documentation | Usage 
 
 The Untity Module Contains some Function That Help Implement Pagianation, Sorting & Filtering Accross Multiple Modules .
 It provides support for pagination, filtering and sorting .
