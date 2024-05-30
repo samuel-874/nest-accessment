@@ -16,11 +16,11 @@ export class RoomsController {
    async findAll(
       @PaginationParam() paginationParams: PaginationsData,
       @SortingParams(['id', 'name', 'capacity','userId']) sort?: Sorting,
-      @FilteringParams(['id', 'name', 'capacity','userId']) filter?: Filtering
+      @FilteringParams(['id', 'name', 'capacity','userId']) filters?: Filtering
       
    ): Promise<PaginatedResource<Rooms>>{
       return this.roomsService.findAll(
-         paginationParams,sort,filter
+         paginationParams,sort,filters
       )
    }
 

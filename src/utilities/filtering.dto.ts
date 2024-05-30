@@ -25,7 +25,7 @@ export enum FilterOperator {
 
 export const FilteringParams = createParamDecorator((data, ctx: ExecutionContext): Filtering => {
     const req: Request = ctx.switchToHttp().getRequest();
-    const filter = req.query.filter as string;
+    const filter = req.query.filters as string;
     if (!filter ) return null;
 
     if (typeof data != 'object') throw new BadRequestException('Invalid filter parameter');
@@ -40,5 +40,7 @@ export const FilteringParams = createParamDecorator((data, ctx: ExecutionContext
     if (!data.includes(field)) throw new BadRequestException(`Invalid filter field: ${field}`);
     if (!Object.values(FilterOperator).includes(operator as FilterOperator)) throw new BadRequestException(`Invalid filter operator: ${operator}`);
 
+    console.log(field,operator,value);
+    
     return { field,  value, operator };
 });
