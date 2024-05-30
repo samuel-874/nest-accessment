@@ -31,16 +31,16 @@ export const FilteringParams = createParamDecorator((data, ctx: ExecutionContext
     if (typeof data != 'object') throw new BadRequestException('Invalid filter parameter');
 
 
-    if (!filter.match(/^[a-zA-Z0-9_]+:(equals|not|gt|gte|lt|lte|like|in|notIn|isNull|isNotNull):[a-zA-Z0-9_,]+$/) && !filter.match(/^[a-zA-Z0-9_]+:(isnull|isnotnull)$/)) {
-        throw new BadRequestException('Invalid filter parameter');
-    }
+    const page = JSON.parse(filter);
+    const filters = page[0];
+    const fields = filters?.field;
+    const values = filters?.values;
+    const operators = filters?.operator;
 
 
-    const [field, operator, value] = filter.split(':');
-    if (!data.includes(field)) throw new BadRequestException(`Invalid filter field: ${field}`);
-    if (!Object.values(FilterOperator).includes(operator as FilterOperator)) throw new BadRequestException(`Invalid filter operator: ${operator}`);
+    if (!data.includes(fields)) throw new BadRequestException(`Invalid filter field: ${fields}`);
+    if (!Object.values(FilterOperator).includes(operators as FilterOperator)) throw new BadRequestException(`Invalid filter operator: ${operators}`);
 
-    console.log(field,operator,value);
-    
-    return { field,  value, operator };
+
+    return { field: fields,  value: values, operator: operators };
 });

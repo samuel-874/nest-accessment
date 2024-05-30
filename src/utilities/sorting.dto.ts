@@ -17,15 +17,14 @@ export const SortingParams = createParamDecorator((validParams, ctx: ExecutionCo
 
     if( typeof validParams != 'object') throw new BadRequestException("Invalid Sort Parameter");
 
-    const sortPattern = /^([a-zA-Z0-9]+):(ASC|DESC|asc|desc)$/;
 
+    // console.log("happened here");
+    const page = JSON.parse(sort);
+    const fields = page[0].field;
+    const orders = page[0].order;
 
-    if(!sort.match(sortPattern))  throw new BadRequestException("Invalid Sort Parameter");
+    if (!validParams.includes(fields)) throw new BadRequestException(`Invalid sort field: ${fields}`);
 
-    const [ field, order ] = sort.split(':');
-
-    if (!validParams.includes(field)) throw new BadRequestException(`Invalid sort field: ${field}`);
-
-    return { field, order }
+    return { field:fields, order: orders }
 
 })
