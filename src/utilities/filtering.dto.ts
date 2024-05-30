@@ -34,7 +34,7 @@ export const FilteringParams = createParamDecorator((data, ctx: ExecutionContext
     const page = JSON.parse(filter);
     const filters = page[0];
     const fields = filters?.field;
-    const values = filters?.values;
+    const values = filters?.value;
     const operators = filters?.operator;
 
 
